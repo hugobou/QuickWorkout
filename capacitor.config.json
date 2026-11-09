@@ -1,0 +1,8 @@
+{
+  "appId": "com.hugo.rutinas",
+  "appName": "Rutinas",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}

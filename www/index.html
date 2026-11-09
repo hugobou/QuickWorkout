@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Rutinas</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Lista de rutinas -->
+<main id="v-home" class="view">
+  <header class="top">
+    <h1>Rutinas</h1>
+    <a class="btn" href="#e-new">Nueva</a>
+    <label class="btn primary" for="file">Importar CSV</label>
+    <input type="file" id="file" accept=".csv,text/csv,text/comma-separated-values,text/plain" hidden>
+  </header>
+  <ul id="routines" class="cards"></ul>
+  <p id="empty" class="empty" hidden>No hay rutinas. Importa un CSV para empezar.</p>
+  <details class="help">
+    <summary>Formato del CSV</summary>
+    <p>Una fila por ejercicio. Separador <code>;</code> o <code>,</code>. La primera fila son los nombres de columna:</p>
+    <pre>bloque;ejercicio;detalle;segundos;lados;transicion
+Core;Plancha;30" x 2;30;1;5
+Core;Plancha lateral;Cadera arriba;30;2;5</pre>
+    <ul>
+      <li><b>ejercicio</b> y <b>segundos</b> son obligatorias.</li>
+      <li><b>segundos</b>: duración por lado.</li>
+      <li><b>lados</b>: 1 o 2 (por defecto 1). Con 2 se hace izquierdo y luego derecho.</li>
+      <li><b>transicion</b>: segundos de preparación antes del ejercicio (por defecto 5, 0 para ninguna).</li>
+      <li><b>bloque</b> y <b>detalle</b> son opcionales.</li>
+      <li>Un ejercicio llamado <b>Descanso</b> se muestra como pausa.</li>
+    </ul>
+  </details>
+</main>
+
+<!-- Detalle de una rutina -->
+<main id="v-detail" class="view" hidden>
+  <header class="top">
+    <a class="back" href="#" aria-label="Volver">‹</a>
+    <h1 id="d-name"></h1>
+  </header>
+  <p class="meta" id="d-meta"></p>
+  <button class="btn primary big" id="d-start">Empezar</button>
+  <div id="d-blocks" class="blocks"></div>
+  <div class="row">
+    <button class="btn" id="d-edit">Editar</button>
+    <button class="btn" id="d-dup">Duplicar</button>
+    <button class="btn" id="d-export">Exportar CSV</button>
+    <button class="btn danger" id="d-delete">Borrar</button>
+  </div>
+</main>
+
+<!-- Crear / editar rutina -->
+<main id="v-edit" class="view" hidden>
+  <header class="top">
+    <a class="back" id="e-back" href="#" aria-label="Volver">‹</a>
+    <h1 id="e-title">Nueva rutina</h1>
+  </header>
+  <label class="field"><span>Nombre</span><input id="e-name" type="text" placeholder="Rutina de fuerza"></label>
+  <p class="meta" id="e-meta"></p>
+  <ol id="e-items" class="edit-items"></ol>
+  <button class="btn" id="e-add">+ Añadir ejercicio</button>
+  <datalist id="e-blocks"></datalist>
+  <div class="row end sticky">
+    <button class="btn" id="e-cancel">Cancelar</button>
+    <button class="btn primary" id="e-save">Guardar</button>
+  </div>
+</main>
+
+<!-- Temporizador -->
+<main id="v-player" class="view" hidden>
+  <header class="top">
+    <a class="back" id="p-back" href="#" aria-label="Volver">‹</a>
+    <h1 id="p-title"></h1>
+    <span class="total" id="p-total"></span>
+  </header>
+  <div class="bar"><i id="p-bar"></i></div>
+  <section class="stage" id="p-stage">
+    <div class="block" id="p-block"></div>
+    <p class="name" id="p-name"></p>
+    <div class="side" id="p-side"></div>
+    <div class="hint" id="p-hint"></div>
+    <div class="ring">
+      <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="prog" id="p-prog" cx="60" cy="60" r="52"/></svg>
+      <div class="t"><b id="p-secs">0</b><span id="p-unit"></span></div>
+    </div>
+    <div class="next" id="p-next"></div>
+  </section>
+  <div class="ctrls">
+    <button class="btn round" id="p-prev" aria-label="Anterior">◀︎</button>
+    <button class="btn primary play" id="p-play">Empezar</button>
+    <button class="btn round" id="p-skip" aria-label="Siguiente">▶︎</button>
+  </div>
+  <div class="opts">
+    <label><input type="checkbox" id="p-beep" checked> Pitidos</label>
+    <button class="btn small" id="p-reset">Reiniciar</button>
+  </div>
+  <ol id="p-list" class="blocks"></ol>
+</main>
+
+<dialog id="dlg">
+  <form method="dialog" id="dlg-form">
+    <p id="dlg-msg"></p>
+    <input id="dlg-input" type="text" hidden>
+    <div class="row end">
+      <button class="btn" value="cancel" id="dlg-cancel">Cancelar</button>
+      <button class="btn primary" value="ok" id="dlg-ok">Aceptar</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="csv.js"></script>
+<script src="default-routine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
