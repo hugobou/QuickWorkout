@@ -1,4 +1,4 @@
-# Rutinas
+# QuickWorkout
 
 App Android para seguir rutinas de ejercicio con temporizador. Funciona sin conexión y guarda las rutinas en el propio móvil.
 
@@ -40,15 +40,15 @@ El APK se firma con una clave propia. **Guarda el archivo `.keystore` y sus cont
 
 1. Genera la clave (necesita Java):
    ```
-   keytool -genkeypair -v -keystore rutinas.keystore -alias rutinas -keyalg RSA -keysize 2048 -validity 10000
+   keytool -genkeypair -v -keystore quickworkout.keystore -alias quickworkout -keyalg RSA -keysize 2048 -validity 10000
    ```
 2. Conviértela a base64:
-   - Linux o Mac: `base64 -w0 rutinas.keystore` (en Mac, `base64 -i rutinas.keystore`)
-   - Windows (PowerShell): `[Convert]::ToBase64String([IO.File]::ReadAllBytes("rutinas.keystore"))`
+   - Linux o Mac: `base64 -w0 quickworkout.keystore` (en Mac, `base64 -i quickworkout.keystore`)
+   - Windows (PowerShell): `[Convert]::ToBase64String([IO.File]::ReadAllBytes("quickworkout.keystore"))`
 3. En GitHub, **Settings › Secrets and variables › Actions**, crea estos secretos:
    - `ANDROID_KEYSTORE_BASE64`: el texto en base64
    - `ANDROID_KEYSTORE_PASSWORD`: la contraseña del almacén
-   - `ANDROID_KEY_ALIAS`: `rutinas`
+   - `ANDROID_KEY_ALIAS`: `quickworkout`
    - `ANDROID_KEY_PASSWORD`: la contraseña de la clave (la misma si no pusiste otra)
 
 ### Versiones
@@ -76,5 +76,5 @@ Abre `http://localhost:8080`. En el navegador las rutinas se guardan en el almac
   - `csv.js`: lectura y escritura de CSV
   - `default-routine.js`: rutina precargada
 - `assets/logo.png`: icono, generado para Android en la compilación
-- `capacitor.config.json`: nombre (`Rutinas`) e identificador (`com.hugo.rutinas`)
+- `capacitor.config.json`: nombre (`QuickWorkout`) e identificador (`com.hugo.quickworkout`)
 - `.github/workflows/android.yml`: compilación y firma del APK

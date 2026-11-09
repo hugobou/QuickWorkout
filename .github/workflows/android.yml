@@ -56,7 +56,7 @@ jobs:
           echo "$KEYSTORE_BASE64" | base64 -d > release.keystore
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           IN=android/app/build/outputs/apk/release/app-release-unsigned.apk
-          OUT=Rutinas-$VERSION-${{ github.run_number }}.apk
+          OUT=QuickWorkout-$VERSION-${{ github.run_number }}.apk
           "$BT/zipalign" -p -f 4 "$IN" aligned.apk
           "$BT/apksigner" sign --ks release.keystore --ks-pass env:KEYSTORE_PASSWORD \
             --ks-key-alias "$KEY_ALIAS" --key-pass env:KEY_PASSWORD --out "$OUT" aligned.apk

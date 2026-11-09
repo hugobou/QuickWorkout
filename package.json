@@ -1,5 +1,5 @@
 {
-  "name": "rutinas",
+  "name": "quickworkout",
   "version": "1.0.0",
   "private": true,
   "description": "Temporizador de rutinas de ejercicio cargadas desde CSV",

@@ -1,4 +1,4 @@
-// Rutinas: lista, importación de CSV y temporizador.
+// QuickWorkout: lista de rutinas, importación de CSV y temporizador.
 (function () {
   const Cap = window.Capacitor;
   const isNative = !!(Cap && Cap.isNativePlatform && Cap.isNativePlatform());

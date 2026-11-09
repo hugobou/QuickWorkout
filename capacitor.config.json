@@ -1,6 +1,6 @@
 {
-  "appId": "com.hugo.rutinas",
-  "appName": "Rutinas",
+  "appId": "com.hugo.quickworkout",
+  "appName": "QuickWorkout",
   "webDir": "www",
   "android": {
     "allowMixedContent": false
